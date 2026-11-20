@@ -1,0 +1,105 @@
+.bio-news {
+  margin: 18px 0 32px;
+}
+
+.bio-news-header {
+  margin-bottom: 16px;
+}
+
+.bio-news-header h2 {
+  margin: 0 0 5px;
+  font-size: clamp(23px, 3.4vw, 32px);
+}
+
+.bio-news-header p,
+.bio-news-progress {
+  color: #b7cce4;
+  font-size: 14px;
+}
+
+.bio-news-deck {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.bio-news-card {
+  --news-accent: #8ed9ce;
+  padding: clamp(18px, 3.4vw, 28px);
+  border: 1px solid #476282;
+  border-inline-start: 4px solid var(--news-accent);
+  border-radius: 14px;
+  background: linear-gradient(135deg, #1a3352, #11243d 75%);
+  color: #f3f7fd;
+  touch-action: pan-y;
+  transform: translateX(var(--news-offset, 0px));
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.bio-news-card[data-news-kind="tool"] { --news-accent: #a8c5ff; }
+.bio-news-card[data-news-kind="paper"] { --news-accent: #ffdc91; }
+
+.bio-news-card.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+  transition: none;
+}
+
+.bio-news-card.is-leaving {
+  transform: translateX(-105%) rotate(-4deg);
+  opacity: 0;
+}
+
+.bio-news-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.bio-news-kind {
+  padding: 3px 8px;
+  color: var(--news-accent);
+  border: 1px solid #8fb2d955;
+  border-radius: 5px;
+}
+
+.bio-news-meta time { color: #bed1e8; }
+
+.bio-news-card h3 {
+  margin: 13px 0 7px;
+  font-size: clamp(19px, 2.8vw, 25px);
+  line-height: 1.5;
+}
+
+.bio-news-card p { color: #e0ebfa; margin: 0; line-height: 1.65; }
+.bio-news-card .bio-news-takeaway { color: #bed1e8; margin-top: 5px; }
+
+.bio-news-source {
+  display: inline-block;
+  margin-top: 13px;
+  padding-block: 4px;
+  color: var(--news-accent);
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.bio-news-empty {
+  padding: 22px;
+  border: 1px solid #476282;
+  border-radius: 14px;
+}
+
+.bio-news-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.bio-news-controls button { min-height: 44px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bio-news-card { transition: none; }
+}

@@ -13,6 +13,12 @@
 
 배포 파일에는 `web.html`에서 만든 `index.html`과 `assets/`만 들어갑니다. 회원가입과 행사 신청은 시연용 화면입니다.
 
+## 바이오인포매틱스 새 소식
+
+**Collect Bioinformatics News** 작업이 매일 오전 9시 17분(한국 시간)에 NCBI Insights, Nextflow·nf-core 릴리스, Europe PMC에서 제목·날짜·원문 주소를 수집합니다. Europe PMC에 응답 문제가 있으면 PubMed에서 논문 후보를 가져옵니다. **Actions**에서 직접 실행하거나 실행 결과의 `bio-news-candidates` 파일을 받아 확인할 수 있습니다.
+
+홈에는 `web.html`의 `bioNewsDeck`에 입력한 카드가 표시됩니다. 원문을 확인한 소식을 골라 무엇이 바뀌었는지와 분석에 참고할 점을 한 줄씩 쓰고, 카드마다 새로운 `data-news-id`를 지정합니다. 카드 편집은 기존 GitHub Pages 배포 작업으로 반영합니다.
+
 ## AWS S3 및 CloudFront 배포
 
 AWS에서 준비한 사이트용 S3 버킷과 CloudFront 배포를 사용합니다. CloudFront의 기본 루트 객체는 `index.html`로 설정합니다. GitHub 저장소에서 **Settings → Secrets and variables → Actions → Variables**로 가서 다음 값을 등록합니다.
