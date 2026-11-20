@@ -18,7 +18,7 @@ jobs:
         with:
           persist-credentials: false
       - name: Collect news candidates
-        run: python3 scripts/collect-bio-news.py "$RUNNER_TEMP/bio-news-candidates.json"
+        run: python3 experiments/v4/scripts/collect-bio-news.py "$RUNNER_TEMP/bio-news-candidates.json"
       - name: Save candidates for editors
         if: ${{ always() }}
         uses: actions/upload-artifact@v6

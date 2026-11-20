@@ -27,7 +27,7 @@ jobs:
       - name: Prepare static files
         id: build
         run: |
-          publish_dir="$(bash scripts/build-pages.sh)"
+          publish_dir="$(bash scripts/build-pages.sh --with-experiments)"
           printf 'path=%s\n' "$publish_dir" >> "$GITHUB_OUTPUT"
       - name: Upload the website
         uses: actions/upload-pages-artifact@v4
