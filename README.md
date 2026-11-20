@@ -12,3 +12,24 @@
 3. **Actions → Deploy WorkflowKR website → Run workflow**에서 기본 브랜치를 선택해 실행합니다. 배포가 끝나면 실행 결과에서 사이트 주소를 확인할 수 있습니다.
 
 배포 파일에는 `web.html`에서 만든 `index.html`과 `assets/`만 들어갑니다. 회원가입과 행사 신청은 시연용 화면입니다.
+
+## AWS S3 및 CloudFront 배포
+
+AWS에서 준비한 사이트용 S3 버킷과 CloudFront 배포를 사용합니다. CloudFront의 기본 루트 객체는 `index.html`로 설정합니다. GitHub 저장소에서 **Settings → Secrets and variables → Actions → Variables**로 가서 다음 값을 등록합니다.
+
+| 변수 | 값 |
+| --- | --- |
+| `AWS_DEPLOY_ROLE_ARN` | 이 저장소의 GitHub Actions가 맡을 AWS IAM 역할 ARN |
+| `AWS_SITE_BUCKET` | 웹 파일을 올릴 S3 버킷 이름 |
+| `AWS_CLOUDFRONT_DISTRIBUTION_ID` | 웹 사이트용 CloudFront 배포 ID |
+| `AWS_REGION` | S3 버킷 리전. 생략하면 `ap-northeast-2` |
+
+AWS IAM에서 GitHub OIDC의 대상(`aud`)을 `sts.amazonaws.com`으로 설정하고, 이 저장소의 기본 `main` 브랜치에 해당하는 주체(`sub`)만 허용합니다.
+
+```text
+repo:workflowkr@358994628/workflowkr.github.io@1464971765:ref:refs/heads/main
+```
+
+IAM 역할에는 사이트 버킷 목록 조회, `index.html` 및 `assets/` 업로드, 지정 CloudFront 배포의 캐시 무효화 권한을 부여합니다. [GitHub Actions AWS OIDC 안내](https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws)
+
+**Actions → Deploy WorkflowKR website to AWS → Run workflow**에서 기본으로 선택된 `check_only`를 사용하면 역할 인증과 S3 접근을 확인합니다. 실제 배포할 때는 `check_only` 선택을 해제합니다.

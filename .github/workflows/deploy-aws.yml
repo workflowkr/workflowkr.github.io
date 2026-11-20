@@ -1,0 +1,64 @@
+name: Deploy WorkflowKR website to AWS
+
+on:
+  workflow_dispatch:
+    inputs:
+      check_only:
+        description: Check AWS authentication and S3 access without deploying
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+  id-token: write
+
+concurrency:
+  group: aws-website
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref_name == github.event.repository.default_branch
+    runs-on: ubuntu-latest
+    env:
+      AWS_DEPLOY_ROLE_ARN: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+      AWS_SITE_BUCKET: ${{ vars.AWS_SITE_BUCKET }}
+      AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ vars.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+    steps:
+      - name: Check required AWS settings
+        env:
+          CHECK_ONLY: ${{ inputs.check_only }}
+        run: |
+          required=(AWS_DEPLOY_ROLE_ARN AWS_SITE_BUCKET)
+          if [[ "$CHECK_ONLY" != true ]]; then
+            required+=(AWS_CLOUDFRONT_DISTRIBUTION_ID)
+          fi
+          for name in "${required[@]}"; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Set the $name repository variable before running this workflow."
+              exit 1
+            fi
+          done
+      - name: Check out the website
+        if: ${{ !inputs.check_only }}
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Authenticate to AWS with GitHub OIDC
+        uses: aws-actions/configure-aws-credentials@v6.3.0
+        with:
+          role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'ap-northeast-2' }}
+          mask-aws-account-id: true
+      - name: Check S3 access
+        run: aws s3api head-bucket --bucket "$AWS_SITE_BUCKET" --no-cli-pager
+      - name: Upload the website and refresh CloudFront
+        if: ${{ !inputs.check_only }}
+        run: |
+          publish_dir="$(bash scripts/build-pages.sh)"
+          aws s3 sync "$publish_dir/assets/" "s3://$AWS_SITE_BUCKET/assets/" --only-show-errors
+          aws s3 cp "$publish_dir/index.html" "s3://$AWS_SITE_BUCKET/index.html" --cache-control no-cache --only-show-errors
+          aws cloudfront create-invalidation \
+            --distribution-id "$AWS_CLOUDFRONT_DISTRIBUTION_ID" \
+            --paths "/" "/index.html" "/assets/*" \
+            --query 'Invalidation.Id' --output text
