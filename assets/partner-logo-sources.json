@@ -1,0 +1,15 @@
+{
+  "AWS": {
+    "page": "https://aws.amazon.com/",
+    "asset": "homepage SVG, data-testid aws-brand-logo"
+  },
+  "Megazone Cloud": {
+    "page": "https://www.megazone.com/",
+    "asset": "official header SVG component 87849, chunk 7051-0f89a2d48f40cd47.js"
+  },
+  "Seqera": {
+    "page": "https://seqera.io/",
+    "asset": "official homepage header SVG class _logo_1ia93_83"
+  },
+  "checked": "2026-11-17"
+}

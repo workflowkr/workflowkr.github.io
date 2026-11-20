@@ -1,0 +1,221 @@
+.app-preferences {
+  display: none;
+}
+
+.mobile-bottom .app-only-tab {
+  display: none !important;
+}
+
+.app-mode body > header {
+  position: static;
+  grid-template-columns: 1fr !important;
+  min-height: 0;
+  padding: 8px 16px !important;
+}
+
+.app-mode body > header .nav,
+.app-mode body > header .header-tools,
+.app-mode .mobile-bottom [data-page="story"] {
+  display: none !important;
+}
+
+.app-mode body > header .logo-brand.v3-brand {
+  height: 36px !important;
+}
+
+.app-mode .mobile-bottom .app-only-tab {
+  display: flex !important;
+}
+
+.app-mode .mobile-bottom button[data-page="metaverse"] {
+  position: relative;
+  top: -8px;
+  min-height: 58px;
+  color: #ffe07c;
+  background: #293042;
+  border: 1px solid #f5c842;
+  border-radius: 12px;
+}
+
+.app-mode .mobile-bottom button[data-page="metaverse"] > span {
+  font-size: 27px;
+}
+
+.app-mode :is(#events, #library) > .page-title,
+.app-mode #projects > .page-title > :not(.project-heading),
+.app-mode #projects:has(#projectPanel[hidden]) > .page-title,
+.app-mode #metaverse > * {
+  display: none;
+}
+
+.app-mode #projects > .page-title {
+  padding: 0;
+}
+
+.app-mode .project-heading h1 {
+  font-size: 22px;
+}
+
+.app-mode :is(#events, #projects, #library).active {
+  padding-top: 18px;
+}
+
+.app-mode #members .app-preferences {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 18px;
+  color: #c0d3ec;
+}
+
+.app-mode #members #appWorldLevel {
+  width: auto;
+  margin: 0;
+  padding: 7px 10px;
+  border-color: #607b9f;
+  border-radius: 6px;
+  background: #172f50;
+  color: #f0f6ff;
+}
+
+.app-mode #members .language-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-mode #members .language-long {
+  display: inline;
+}
+
+.app-mode #members .language-short {
+  display: none;
+}
+
+.app-mode:has(#app-intro.active) body {
+  padding-bottom: 0;
+}
+
+.app-mode:has(#app-intro.active) main {
+  padding: 0;
+}
+
+.app-mode:has(#app-intro.active) body > header,
+.app-mode:has(#app-intro.active) .mobile-bottom {
+  display: none !important;
+}
+
+.app-mode #app-intro.active {
+  display: flex;
+  align-items: flex-end;
+  min-height: 100dvh;
+  padding: 36px 24px 32px;
+  background:
+    linear-gradient(180deg, #0c192d10, #0c192d 70%) center / cover,
+    url(template-cover-slide.png) right top / auto 69% no-repeat,
+    #0c192d;
+}
+
+.app-intro-content {
+  width: 100%;
+}
+
+.app-intro-content h1 {
+  margin: 12px 0 16px;
+  font-size: clamp(30px, 8vw, 37px);
+  line-height: 1.35;
+  letter-spacing: -.035em;
+}
+
+.app-intro-content h1 em {
+  color: #a9c8ff;
+  font-style: normal;
+}
+
+.app-intro-content > p {
+  margin: 0 0 22px;
+  color: #c6d6eb;
+}
+
+.app-intro-content .app-intro-philosophy {
+  font-size: 14px;
+  color: #aac7f6;
+  letter-spacing: .025em;
+}
+
+.app-intro-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.app-mode #worldDialog .world-layout {
+  position: relative;
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.app-mode #worldDialog .world-top {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 8;
+  padding: 0 !important;
+  border: 0;
+  background: transparent;
+}
+
+.app-mode #worldDialog .world-exit {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.app-mode #worldDialog :is(.world-heading, .world-tabs, .world-bottom, .world-coordinate,
+  .world-instruction, .world-position-hud, .world-time-widget, .lab-guide-toggle,
+  .world-chat-toggle, #worldHotspots),
+.app-mode #worldDialog .world-3d-controls button:not([data-camera="in"]):not([data-camera="out"]) {
+  display: none !important;
+}
+
+.app-mode #worldDialog .world-scene {
+  grid-row: 1;
+  min-height: 0;
+}
+
+.app-mode #worldDialog .world-3d-controls {
+  top: 12px;
+  right: auto;
+}
+
+.app-mode #worldDialog .world-move-pad {
+  bottom: 20px;
+}
+
+.app-mode #worldDialog .world-flight-pad {
+  bottom: 105px;
+}
+
+.app-world-doors {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.app-world-doors button {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  min-height: 38px;
+  padding: 6px 10px;
+  border: 1px solid var(--door-color);
+  border-radius: 8px;
+  background: #0d2139ed;
+  color: #f3f7ff;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: auto;
+}
