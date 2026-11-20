@@ -39,10 +39,11 @@ jobs:
               exit 1
             fi
           done
-      - name: Check out the website
+      - name: Check out the approved v3 website
         if: ${{ !inputs.check_only }}
         uses: actions/checkout@v6
         with:
+          ref: refs/tags/v3
           persist-credentials: false
       - name: Authenticate to AWS with GitHub OIDC
         uses: aws-actions/configure-aws-credentials@v6.3.0
@@ -52,9 +53,10 @@ jobs:
           mask-aws-account-id: true
       - name: Check S3 access
         run: aws s3api head-bucket --bucket "$AWS_SITE_BUCKET" --no-cli-pager
-      - name: Upload the website and refresh CloudFront
+      - name: Upload v3 and refresh CloudFront
         if: ${{ !inputs.check_only }}
         run: |
+          printf 'Deploying WorkflowKR v3 (%s)\n' "$(git rev-parse --short HEAD)"
           publish_dir="$(bash scripts/build-pages.sh)"
           aws s3 sync "$publish_dir/assets/" "s3://$AWS_SITE_BUCKET/assets/" --only-show-errors
           aws s3 cp "$publish_dir/index.html" "s3://$AWS_SITE_BUCKET/index.html" --cache-control no-cache --only-show-errors

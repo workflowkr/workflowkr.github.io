@@ -21,6 +21,8 @@
 
 ## AWS S3 및 CloudFront 배포
 
+**현재 승인된 AWS 배포본은 `v3`입니다.** 뉴스 카드를 추가하기 전의 커밋 `930e116`에 `v3` 태그를 지정했습니다. Actions는 `main`에서 실행하며 S3에 올리는 웹 파일은 `refs/tags/v3`에서 가져옵니다. 바이오인포매틱스 뉴스 카드는 GitHub Pages에서 확인하는 `v4` 시안입니다.
+
 AWS에서 준비한 사이트용 S3 버킷과 CloudFront 배포를 사용합니다. CloudFront의 기본 루트 객체는 `index.html`로 설정합니다. GitHub 저장소에서 **Settings → Secrets and variables → Actions → Variables**로 가서 다음 값을 등록합니다.
 
 | 변수 | 값 |
