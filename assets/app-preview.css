@@ -2,10 +2,6 @@
   display: none;
 }
 
-.mobile-bottom .app-only-tab {
-  display: none !important;
-}
-
 .app-mode body > header {
   position: static;
   grid-template-columns: 1fr !important;
@@ -14,17 +10,12 @@
 }
 
 .app-mode body > header .nav,
-.app-mode body > header .header-tools,
-.app-mode .mobile-bottom [data-page="story"] {
+.app-mode body > header .header-tools {
   display: none !important;
 }
 
 .app-mode body > header .logo-brand.v3-brand {
   height: 36px !important;
-}
-
-.app-mode .mobile-bottom .app-only-tab {
-  display: flex !important;
 }
 
 .app-mode .mobile-bottom button[data-page="metaverse"] {
