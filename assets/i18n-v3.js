@@ -784,7 +784,9 @@
       const current=node.textContent;
       let entry=sources.get(node);
       if(!entry || (current!==entry.source && current!==entry.output)) entry={source:current,output:current};
-      entry.output=language==='en'?translate(entry.source):entry.source;
+      entry.output=language==='en'
+        ? (node.parentElement.getAttribute('data-i18n-en') ?? translate(entry.source))
+        : entry.source;
       sources.set(node,entry);
       if(node.textContent!==entry.output) node.textContent=entry.output;
     }
