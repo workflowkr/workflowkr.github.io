@@ -18,7 +18,7 @@ GitHub Pages 배포에서는 확정본을 기본 주소에, v4 시안을 `/exper
 
 **Collect Bioinformatics News** 작업이 매일 오전 9시 17분(한국 시간)에 NCBI Insights, Nextflow·nf-core 릴리스, Europe PMC에서 제목·날짜·원문 주소를 수집합니다. Europe PMC에 응답 문제가 있으면 PubMed에서 논문 후보를 가져옵니다. **Actions**에서 직접 실행하거나 실행 결과의 `bio-news-candidates` 파일을 받아 확인할 수 있습니다.
 
-뉴스 카드는 `experiments/v4/web.html`의 `bioNewsDeck`에서 편집합니다. 원문을 확인한 소식을 골라 무엇이 바뀌었는지와 분석에 참고할 점을 한 줄씩 쓰고, 카드마다 새로운 `data-news-id`를 지정합니다. 카드 편집은 기존 GitHub Pages 배포 작업으로 반영합니다. 각 커버는 주제를 표현한 일러스트이며 연구 원본 이미지와는 별개입니다.
+뉴스 카드는 `experiments/v4/web.html`의 `bioNewsCovers`에서 편집합니다. 각 카드에 제목, 요약, 분석에 참고할 점, 원문 링크를 넣고 고유한 `data-news-id`를 지정합니다. 화면에서 카드를 좌우로 끌거나 이전·다음 버튼으로 넘길 수 있습니다. 카드 편집은 GitHub Pages 배포 작업으로 반영합니다. 표지 이미지는 각 소식의 주제를 표현한 일러스트입니다.
 
 ## AWS S3 및 CloudFront 배포
 

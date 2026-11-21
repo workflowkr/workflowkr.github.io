@@ -1,109 +1,145 @@
 (() => {
-  const deck = document.getElementById('bioNewsDeck');
-  const cards = [...deck.querySelectorAll('[data-news-id]')];
-  const next = document.getElementById('bioNewsNext');
-  const reset = document.getElementById('bioNewsReset');
-  const progress = document.getElementById('bioNewsProgress');
-  const empty = document.getElementById('bioNewsEmpty');
-  const storageKey = 'workflowkr-dismissed-bio-news';
+  const home = document.getElementById('bioNews');
+  const deck = document.getElementById('bioNewsCovers');
+  const slides = [...deck.querySelectorAll('.news-feature')];
+  const previous = document.getElementById('bioNewsCoverPrevious');
+  const next = document.getElementById('bioNewsCoverNext');
+  const position = document.getElementById('bioNewsCoverPosition');
+  const announcement = document.getElementById('bioNewsCoverAnnouncement');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const dismissed = new Set();
-  let activeCard;
-  let leaving = false;
-  let swipe;
+  let currentIndex = 0;
+  let behind;
+  let gesture;
+  let settling = false;
 
-  try {
-    const saved = JSON.parse(localStorage.getItem(storageKey));
-    if (Array.isArray(saved)) {
-      for (const id of saved) dismissed.add(id);
+  function updatePosition() {
+    position.textContent = `${currentIndex + 1} / ${slides.length}`;
+    announcement.textContent = `${position.textContent} · ${slides[currentIndex].querySelector('h3').textContent}`;
+  }
+
+  function clearBehind() {
+    if (!behind) return;
+    behind.hidden = true;
+    behind.inert = false;
+    behind.classList.remove('is-behind');
+    behind = undefined;
+  }
+
+  function revealBehind(direction) {
+    const index = (currentIndex + direction + slides.length) % slides.length;
+    const slide = slides[index];
+    if (slide === behind) return;
+    clearBehind();
+    slide.inert = true;
+    slide.classList.add('is-behind');
+    slide.hidden = false;
+    behind = slide;
+  }
+
+  function dragTransform(dx, dy) {
+    const tilt = reduceMotion.matches ? 0 : Math.max(-13, Math.min(13, dx / deck.clientWidth * 24));
+    const verticalOffset = Math.max(-65, Math.min(65, dy * 0.4));
+    return `translate3d(${dx}px, ${verticalOffset}px, 0) rotate(${tilt}deg)`;
+  }
+
+  async function settle(direction) {
+    if (settling || slides.length < 2) return;
+    if (direction) revealBehind(direction);
+    settling = true;
+    const slide = slides[currentIndex];
+    const destination = direction ? dragTransform(-direction * deck.clientWidth * 1.35, 90) : 'none';
+    if (!reduceMotion.matches) {
+      const motion = slide.animate([
+        { transform: slide.style.transform || 'none', opacity: 1 },
+        { transform: destination, opacity: direction ? 0 : 1 },
+      ], { duration: direction ? 260 : 210, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      await motion.finished.catch(() => {});
     }
-  } catch {}
-
-  function saveDismissed() {
-    try { localStorage.setItem(storageKey, JSON.stringify([...dismissed])); } catch {}
-  }
-
-  function showNextCard() {
-    const remainingCards = cards.filter(card => !dismissed.has(card.dataset.newsId));
-    activeCard = remainingCards[0];
-    for (const card of cards) card.hidden = card !== activeCard;
-    const isEmpty = !activeCard;
-    deck.hidden = isEmpty;
-    empty.hidden = !isEmpty;
-    next.hidden = isEmpty;
-    reset.hidden = !isEmpty;
-    progress.textContent = activeCard
-      ? (cards.length - remainingCards.length + 1) + ' / ' + cards.length
-      : '';
-  }
-
-  function dismissCard() {
-    if (!activeCard || leaving) return;
-    leaving = true;
-    const card = activeCard;
-    card.classList.add('is-leaving');
-
-    const finish = () => {
-      const focusWasOnNext = document.activeElement === next;
-      dismissed.add(card.dataset.newsId);
-      saveDismissed();
-      showNextCard();
-      card.classList.remove('is-leaving');
-      leaving = false;
-      if (!activeCard && focusWasOnNext) reset.focus();
-    };
-    if (reduceMotion.matches) finish();
-    else window.setTimeout(finish, 180);
-  }
-
-  function finishSwipe(event) {
-    if (!swipe || swipe.pointerId !== event.pointerId) return;
-    const { card, x, dragging } = swipe;
-    swipe = null;
-    card.classList.remove('is-dragging');
-    card.style.removeProperty('--news-offset');
-    if (event.type === 'pointerup' && dragging && event.clientX - x <= -Math.min(100, card.offsetWidth / 4)) {
-      dismissCard();
+    slide.style.removeProperty('transform');
+    if (direction) {
+      const wasFocused = slide.contains(document.activeElement);
+      slide.hidden = true;
+      currentIndex = slides.indexOf(behind);
+      behind.inert = false;
+      behind.classList.remove('is-behind');
+      behind = undefined;
+      updatePosition();
+      home.scrollIntoView({ block: 'start', behavior: 'instant' });
+      if (wasFocused) slides[currentIndex].querySelector('.news-source').focus({ preventScroll: true });
+    } else {
+      clearBehind();
     }
+    settling = false;
   }
 
   deck.addEventListener('pointerdown', event => {
-    if (!activeCard || leaving || swipe || !event.isPrimary || event.button !== 0 ||
-        !activeCard.contains(event.target) || event.target.closest('a, button')) return;
-    swipe = { card: activeCard, pointerId: event.pointerId, x: event.clientX, y: event.clientY, dragging: false };
+    if (gesture || settling || slides.length < 2 || !event.isPrimary || event.button !== 0 || event.target.closest('a')) return;
+    gesture = { id: event.pointerId, x: event.clientX, y: event.clientY, start: event.timeStamp, dragging: false };
   });
 
   deck.addEventListener('pointermove', event => {
-    if (!swipe || swipe.pointerId !== event.pointerId) return;
-    const dx = event.clientX - swipe.x;
-    const dy = event.clientY - swipe.y;
-    if (!swipe.dragging) {
-      if (Math.abs(dy) > 12 && Math.abs(dy) > Math.abs(dx)) {
-        swipe = null;
+    if (event.pointerId !== gesture?.id) return;
+    const dx = event.clientX - gesture.x;
+    const dy = event.clientY - gesture.y;
+    if (!gesture.dragging) {
+      if (Math.abs(dy) >= 10 && Math.abs(dy) > Math.abs(dx)) {
+        gesture = undefined;
         return;
       }
-      if (dx > -12 || -dx < Math.abs(dy)) return;
-      swipe.dragging = true;
+      if (Math.abs(dx) < 10 || Math.abs(dx) <= Math.abs(dy)) return;
+      gesture.dragging = true;
       deck.setPointerCapture(event.pointerId);
-      swipe.card.classList.add('is-dragging');
+      deck.classList.add('is-dragging');
     }
-    swipe.card.style.setProperty('--news-offset', Math.min(dx, 0) + 'px');
+    revealBehind(dx <= 0 ? 1 : -1);
+    slides[currentIndex].style.transform = dragTransform(dx, dy);
   });
 
-  deck.addEventListener('pointerup', finishSwipe);
-  deck.addEventListener('pointercancel', finishSwipe);
+  function finishGesture(event) {
+    if (event.pointerId !== gesture?.id) return;
+    const { x, y, start, dragging } = gesture;
+    gesture = undefined;
+    if (!dragging) return;
+    deck.classList.remove('is-dragging');
+    const dx = event.clientX - x;
+    const distance = Math.abs(dx);
+    const distanceThreshold = Math.min(140, deck.clientWidth * 0.2);
+    const quickFlick = distance > 48 && distance / Math.max(1, event.timeStamp - start) > 0.55;
+    const isHorizontal = distance > Math.abs(event.clientY - y) * 1.35;
+    const commit = event.type === 'pointerup' && isHorizontal && (distance >= distanceThreshold || quickFlick);
+    settle(commit ? (dx < 0 ? 1 : -1) : 0);
+  }
+
+  deck.addEventListener('pointerup', finishGesture);
+  deck.addEventListener('pointercancel', finishGesture);
   deck.addEventListener('lostpointercapture', event => {
-    if (event.target === deck) finishSwipe(event);
+    if (event.target === deck) finishGesture(event);
   });
   deck.addEventListener('pointerleave', event => {
-    if (!swipe?.dragging) finishSwipe(event);
+    if (gesture?.id === event.pointerId && !gesture.dragging) gesture = undefined;
   });
-  next.addEventListener('click', dismissCard);
-  reset.addEventListener('click', () => {
-    for (const card of cards) dismissed.delete(card.dataset.newsId);
-    saveDismissed();
-    showNextCard();
-    next.focus();
+  deck.addEventListener('dragstart', event => event.preventDefault());
+
+  function turnFromControl(direction) {
+    if (!gesture) settle(direction);
+  }
+  previous.addEventListener('click', () => turnFromControl(-1));
+  next.addEventListener('click', () => turnFromControl(1));
+  home.addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight'].includes(event.key) || event.altKey || event.metaKey || event.ctrlKey) return;
+    event.preventDefault();
+    turnFromControl(event.key === 'ArrowRight' ? 1 : -1);
   });
-  showNextCard();
+  updatePosition();
+
+  const header = document.querySelector('body > header');
+  const bottomNav = document.querySelector('.mobile-bottom');
+  function sizeCoverToViewport() {
+    home.style.setProperty('--news-top', `${header.getBoundingClientRect().height}px`);
+    home.style.setProperty('--news-bottom', `${bottomNav.getBoundingClientRect().height}px`);
+  }
+  const chromeObserver = new ResizeObserver(sizeCoverToViewport);
+  chromeObserver.observe(header);
+  chromeObserver.observe(bottomNav);
+  sizeCoverToViewport();
 })();
