@@ -20,6 +20,7 @@ jobs:
   deploy:
     if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
+    environment: aws-production
     env:
       AWS_DEPLOY_ROLE_ARN: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
       AWS_SITE_BUCKET: ${{ vars.AWS_SITE_BUCKET }}
@@ -41,12 +42,12 @@ jobs:
           done
       - name: Check out the approved v3 website
         if: ${{ !inputs.check_only }}
-        uses: actions/checkout@v6
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           ref: refs/tags/v3
           persist-credentials: false
       - name: Authenticate to AWS with GitHub OIDC
-        uses: aws-actions/configure-aws-credentials@v6.3.0
+        uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
         with:
           role-to-assume: ${{ vars.AWS_DEPLOY_ROLE_ARN }}
           aws-region: ${{ vars.AWS_REGION || 'ap-northeast-2' }}

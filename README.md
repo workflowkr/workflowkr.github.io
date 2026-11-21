@@ -33,12 +33,12 @@ AWS에서 준비한 사이트용 S3 버킷과 CloudFront 배포를 사용합니�
 | `AWS_CLOUDFRONT_DISTRIBUTION_ID` | 웹 사이트용 CloudFront 배포 ID |
 | `AWS_REGION` | S3 버킷 리전. 생략하면 `ap-northeast-2` |
 
-AWS IAM에서 GitHub OIDC의 대상(`aud`)을 `sts.amazonaws.com`으로 설정하고, 이 저장소의 기본 `main` 브랜치에 해당하는 주체(`sub`)만 허용합니다.
+AWS IAM에서 GitHub OIDC의 대상(`aud`)을 `sts.amazonaws.com`으로 설정하고, 이 저장소의 `aws-production` 배포 환경에 해당하는 주체(`sub`)만 허용합니다.
 
 ```text
-repo:workflowkr@358994628/workflowkr.github.io@1464971765:ref:refs/heads/main
+repo:workflowkr@358994628/workflowkr.github.io@1464971765:environment:aws-production
 ```
 
 IAM 역할에는 사이트 버킷 목록 조회, `index.html` 및 `assets/` 업로드, 지정 CloudFront 배포의 캐시 무효화 권한을 부여합니다. [GitHub Actions AWS OIDC 안내](https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws)
 
-**Actions → Deploy WorkflowKR website to AWS → Run workflow**에서 기본으로 선택된 `check_only`를 사용하면 역할 인증과 S3 접근을 확인합니다. 실제 배포할 때는 `check_only` 선택을 해제합니다.
+**Actions → Deploy WorkflowKR website to AWS → Run workflow**에서 `main`으로 실행합니다. 실행을 시작하면 `aws-production` 승인자가 검토합니다. 기본값인 `check_only`는 승인 후 역할 인증과 S3 접근을 확인합니다. 실제 배포할 때는 `check_only` 선택을 해제합니다.
