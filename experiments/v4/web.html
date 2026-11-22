@@ -256,7 +256,7 @@ header .logo-brand.v3-brand .v3-logo-image{position:static;display:block;width:1
 </style><style>
 .topic-strip.three-e-strip>button[data-world]{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;line-height:1.5;letter-spacing:0}.e-place-name{font-size:16px;font-weight:700;white-space:nowrap}.e-place-english{font-size:12px;font-weight:400;color:#9ebbdc;letter-spacing:0;white-space:nowrap}.philosophy-3e{display:block;font:500 15px/1.8 Pretendard,sans-serif;letter-spacing:.03em;color:#a9c6ff;margin-top:15px}
 @media(max-width:700px){.topic-strip.three-e-strip{gap:5px}.topic-strip.three-e-strip>button[data-world]{gap:3px;padding:10px 0}.e-place-name{font-size:12px}.e-place-english{font-size:10px}.three-e-strip .flow-connector{min-width:8px;margin:0 2px}.philosophy-3e{font-size:13px}}
-</style><style>.three-e-strip .e-place-name:before,.three-e-strip .e-place-english:before{content:none!important;display:none!important}@media(max-width:700px){.e-place-name{font-size:13px}.e-place-english{font-size:11px}}</style><style>.nav button.metaverse-nav-highlight{color:#d9e9ff;background:linear-gradient(120deg,#2c57904d,#4e38754d);border:1px solid #7e9fd575;border-radius:7px;padding:8px 13px;margin:6px 0;box-shadow:inset 0 1px 0 #b8d5ff14}.nav button.metaverse-nav-highlight:hover{background:linear-gradient(120deg,#3565a078,#674e8b70);border-color:#bad3ff}.nav button.metaverse-nav-highlight.active{color:#fff;border-color:#accfff}.nav button.metaverse-nav-highlight span{font-size:12px;margin-left:4px}</style><style>.world-flight-pad{position:absolute;left:24px;bottom:165px;display:flex;gap:5px;z-index:4}.world-flight-pad button{border:1px solid #7a9aba;background:#132a43dc;color:#deecff;border-radius:6px;padding:7px;font-size:11px}@media(max-width:700px){.world-flight-pad{left:15px;bottom:150px}}</style><style>
+</style><style>.three-e-strip .e-place-name:before,.three-e-strip .e-place-english:before{content:none!important;display:none!important}@media(max-width:700px){.e-place-name{font-size:13px}.e-place-english{font-size:11px}}</style><style>.nav button.metaverse-nav-highlight{color:#d9e9ff;background:linear-gradient(120deg,#2c57904d,#4e38754d);border:1px solid #7e9fd575;border-radius:7px;padding:8px 13px;margin:6px 0;box-shadow:inset 0 1px 0 #b8d5ff14}.nav button.metaverse-nav-highlight:hover{background:linear-gradient(120deg,#3565a078,#674e8b70);border-color:#bad3ff}.nav button.metaverse-nav-highlight.active{color:#fff;border-color:#accfff}</style><style>.world-flight-pad{position:absolute;left:24px;bottom:165px;display:flex;gap:5px;z-index:4}.world-flight-pad button{border:1px solid #7a9aba;background:#132a43dc;color:#deecff;border-radius:6px;padding:7px;font-size:11px}@media(max-width:700px){.world-flight-pad{left:15px;bottom:150px}}</style><style>
 /* The brand and actions own row one; navigation owns row two. */
 body>header{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important;justify-content:stretch!important;gap:0 24px!important;height:auto!important;min-height:82px;padding-top:10px!important;padding-bottom:0!important}
 body>header .logo-brand.v3-brand{grid-column:1!important;grid-row:1!important;width:100%;max-width:270px!important;min-width:0!important;flex:initial!important;margin:0!important;overflow:hidden}
@@ -294,7 +294,7 @@ body>header .nav button{flex:0 0 auto;max-width:100%;white-space:nowrap}
  html[lang=en] body>header .nav button.metaverse-nav-highlight{padding:8px}
 }
 </style><style>
-.language-short,.join-short{display:none}
+.join-short{display:none}
 @media(min-width:1200px){
  body>header .nav{gap:clamp(20px,1.7vw,32px)!important;justify-content:center!important}
  body>header .nav button{font-size:16px!important;font-weight:700;line-height:1.5;padding:15px 0}
@@ -308,7 +308,7 @@ body>header .nav button{flex:0 0 auto;max-width:100%;white-space:nowrap}
  body>header{padding:8px 12px!important;gap:0 8px!important}
  body>header .header-tools{gap:6px!important}
  body>header .header-tools>.primary{display:inline-flex!important;padding:8px 9px;font-size:12px;border-radius:6px;min-width:0}
- .join-long,.language-long{display:none}.join-short,.language-short{display:inline}
+ .join-long{display:none}.join-short{display:inline}
  body>header .language-toggle{padding:8px 7px;font-size:12px}
  body>header .menu-toggle{padding:7px 9px}
  body>header .nav button{font-size:16px!important}
@@ -345,7 +345,82 @@ body>header .nav .project-member-nav{position:relative;display:inline-flex;align
 #projects:has(#projectPanel[hidden]) .project-members-badge{display:none}
 .mobile-bottom .project-member-nav{position:relative}
 .mobile-bottom .project-mobile-crown{position:absolute;top:0;left:calc(50% + 8px);pointer-events:none}
-.mobile-bottom button[data-page="metaverse"]>b{line-height:1.25;text-wrap:balance}
+body>header .nav button.metaverse-nav-highlight{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  border-color:#ffe08a85;
+  border-radius:999px;
+}
+.metaverse-menu-mark{
+  display:inline-grid;
+  place-items:center;
+  flex:none;
+  color:#ffe08a;
+  font:400 26px/1 system-ui,sans-serif;
+  text-shadow:0 0 12px #ffd46950;
+}
+.mobile-bottom>button>span:first-child{
+  display:grid;
+  place-items:center;
+  flex:none;
+  height:23px;
+}
+body .mobile-bottom button.metaverse-bottom-highlight[data-page="metaverse"]{
+  position:relative;
+  top:auto;
+  isolation:isolate;
+  min-height:52px;
+  padding:3px;
+  border:0;
+  background:transparent;
+  color:#f4e7c5;
+}
+body .mobile-bottom button.metaverse-bottom-highlight[data-page="metaverse"]::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  top:-11px;
+  left:50%;
+  width:min(100%,64px);
+  height:61px;
+  transform:translateX(-50%);
+  border-radius:47% 47% 30% 30% / 47% 47% 26% 26%;
+  background:radial-gradient(ellipse at 50% 43%,#2c405dcc,#20324c77 55%,transparent 79%);
+  box-shadow:0 4px 13px #0409158c;
+  pointer-events:none;
+}
+body .mobile-bottom button.metaverse-bottom-highlight[data-page="metaverse"].active::before{
+  background-color:#293b5666;
+}
+.mobile-bottom .metaverse-bottom-highlight>b{
+  text-align:center;
+  white-space:nowrap;
+}
+body .mobile-bottom button[data-page="metaverse"]>span.metaverse-menu-mark{
+  align-self:center;
+  font-size:30px;
+  line-height:1;
+}
+.mobile-bottom .metaverse-menu-mark>span{transform:translateY(-4px)}
+@media(max-width:700px){
+  body>header .header-tools>:is(.primary,.language-toggle,.menu-toggle){
+    display:inline-flex!important;
+    position:relative!important;
+    align-items:center;
+    justify-content:center;
+    gap:4px;
+    height:36px;
+    min-height:36px;
+    padding-block:0;
+    line-height:1.2;
+  }
+  body>header .header-tools>:is(.primary,.language-toggle,.menu-toggle)::after{
+    content:"";
+    position:absolute;
+    inset:-4px 0;
+  }
+}
 @media(min-width:1200px){
   body>header .nav .project-nav-crown{position:absolute;bottom:calc(50% + 13px);left:50%;transform:translateX(-50%)}
 }
@@ -378,7 +453,7 @@ body>header .nav .project-member-nav{position:relative;display:inline-flex;align
   .member-profile-points{column-gap:14px}
   #memberActivityPanel .contribution-grid{grid-template-columns:minmax(0,1fr)}
 }
-</style><link rel="stylesheet" href="assets/app-preview.css"><link rel="stylesheet" href="assets/bio-news.css?v=20261120"></head><body><header><a class="brand logo-brand v3-brand" href="#home" aria-label="WorkflowKR 홈"><span class="logo-slot logo-slot-header" aria-hidden="true">LOGO 예정</span></a><nav class="nav" aria-label="주 메뉴"><button data-page="story">모임 소개</button><button data-page="events" aria-label="다가오는 이벤트">다가오는 이벤트</button><button data-page="library" aria-label="세션 다시보기">세션 다시보기</button><button class="project-member-nav" data-page="projects" aria-label="진행 중 프로젝트 · 회원 전용"><span>진행 중 프로젝트</span><span class="project-nav-crown" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M2 5.5 5.4 8l2.6-4 2.6 4L14 5.5l-1.5 6.3h-9z"/><path d="M3.6 12.8h8.8v1H3.6z"/></svg></span></button><button class="metaverse-nav-highlight" data-page="metaverse">메타버스 탐험 <span aria-hidden="true">↗</span></button></nav><div class="header-tools"><button class="primary" data-page="members/signup"><span class="join-long">회원 가입 →</span><span class="join-short">가입</span></button><button id="languageToggle" class="language-toggle" aria-label="Switch to English">🇺🇸 English</button><button id="mobileMenu" class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button></div></header><main>
+</style><link rel="stylesheet" href="assets/app-preview.css"><link rel="stylesheet" href="assets/bio-news.css?v=20261120"></head><body><header><a class="brand logo-brand v3-brand" href="#home" aria-label="WorkflowKR 홈"><span class="logo-slot logo-slot-header" aria-hidden="true">LOGO 예정</span></a><nav class="nav" aria-label="주 메뉴"><button data-page="story">모임 소개</button><button data-page="events" aria-label="다가오는 이벤트">다가오는 이벤트</button><button data-page="library" aria-label="세션 다시보기">세션 다시보기</button><button class="project-member-nav" data-page="projects" aria-label="진행 중 프로젝트 · 회원 전용"><span>진행 중 프로젝트</span><span class="project-nav-crown" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M2 5.5 5.4 8l2.6-4 2.6 4L14 5.5l-1.5 6.3h-9z"/><path d="M3.6 12.8h8.8v1H3.6z"/></svg></span></button><button class="metaverse-nav-highlight" data-page="metaverse"><span class="metaverse-menu-mark" aria-hidden="true">✧</span>메타버스 탐험</button></nav><div class="header-tools"><button class="primary" data-page="members/signup"><span class="join-long">회원 가입 →</span><span class="join-short">가입</span></button><button id="languageToggle" class="language-toggle" aria-label="Switch to English"><span aria-hidden="true">🇺🇸</span> ENG</button><button id="mobileMenu" class="menu-toggle" aria-label="메뉴 열기" aria-expanded="false">☰</button></div></header><main>
 <section class="view" id="app-intro" aria-labelledby="appIntroTitle">
   <div class="app-intro-content">
     <p class="kicker">WORKFLOWKR</p>
@@ -391,9 +466,12 @@ body>header .nav .project-member-nav{position:relative;display:inline-flex;align
     </div>
   </div>
 </section>
-<div class="view active" id="home"><section class="hero"><div><div class="kicker">IDEAS INTO WORKFLOWS</div><div class="work-flow-mark"><span class="logo-slot logo-slot-hero">LOGO 예정</span></div><h1 class="connected-title"><span>실험하고, 실행하고,</span><br><em>선순환을 실현합니다.</em></h1><div class="actions"><button class="primary" data-page="members/signup">회원으로 함께하기 →</button><button class="secondary" data-page="events">모임 일정</button></div></div></section>
+<div class="view active" id="home">
+<div class="home-intro">
+  <h1 data-i18n-en="A community building bioinformatics workflows together">바이오인포매틱스 워크플로를 함께 만드는 모임</h1>
+</div>
 <section class="news-editorial" id="bioNews" aria-labelledby="bioNewsTitle">
-  <h2 class="news-edition" id="bioNewsTitle" data-i18n-en="Bioinformatics News">바이오인포매틱스 새 소식</h2>
+  <h2 class="news-edition" id="bioNewsTitle" data-i18n-en="Latest news">새 소식</h2>
   <div class="news-feature-covers" id="bioNewsCovers">
     <article class="news-feature" data-news-id="refseq-238" data-news-kind="data">
       <div class="news-feature-image" aria-hidden="true"></div>
@@ -427,14 +505,23 @@ body>header .nav .project-member-nav{position:relative;display:inline-flex;align
     </article>
   </div>
   <div class="news-feature-nav">
-    <button id="bioNewsCoverPrevious" type="button" data-i18n-en="Previous">이전</button>
+    <span class="news-slide-hint" aria-hidden="true">
+      <svg viewBox="0 0 28 16"><path d="M3 12c6-5 14-7 22-4m-5-5 5 5-6 4"/></svg>
+      <span>SLIDE</span>
+      <svg viewBox="0 0 28 16"><path d="M3 12c6-5 14-7 22-4m-5-5 5 5-6 4"/></svg>
+    </span>
+    <button id="bioNewsCoverPrevious" type="button">
+      <span class="news-visually-hidden" data-i18n-en="Previous story">이전 소식</span>
+    </button>
     <span id="bioNewsCoverPosition" aria-hidden="true"></span>
-    <button id="bioNewsCoverNext" type="button" data-i18n-en="Next">다음</button>
+    <button id="bioNewsCoverNext" type="button">
+      <span class="news-visually-hidden" data-i18n-en="Next story">다음 소식</span>
+    </button>
     <span class="news-visually-hidden" id="bioNewsCoverAnnouncement" role="status"></span>
   </div>
 </section>
-<div class="topic-strip three-e-strip" aria-label="Experiment, Execute, Exchange"><button type="button" lang="en" data-world="cell" aria-label="실험의 공간 · Experiment 메타버스 입장"><span class="e-place-name">실험의 공간</span><small class="e-place-english" lang="en">(Experiment)</small></button><i class="flow-connector" aria-hidden="true"><span></span></i><button type="button" lang="en" data-world="reality" aria-label="실행의 아지트 · Execute 메타버스 입장"><span class="e-place-name">실행의 아지트</span><small class="e-place-english" lang="en">(Execute)</small></button><i class="flow-connector" aria-hidden="true"><span></span></i><button type="button" lang="en" data-world="cosmos" aria-label="순환의 허브 · Exchange 메타버스 입장"><span class="e-place-name">순환의 허브</span><small class="e-place-english" lang="en">(Exchange)</small></button></div><p class="world-hint"><button class="world-explore-link" type="button" data-page="metaverse">세 공간 한눈에 보기 ↗</button></p><section class="block"><div class="section-head"><h2>다음 만남</h2><button class="text-button" data-page="events">모임 일정 →</button></div><article class="event-feature"><div class="date"><small>December</small><strong>17</strong><span>목요일</span></div><div><span class="tag">오프라인 · 정식 모집 준비 중</span><h3>2026 송년 밋업</h3><p class="muted">12월 17일(목) · 서울 센터필드 AWS</p></div><div class="event-side"><span class="availability">영상 같이보기 · 회고 · 대화</span><button class="primary" data-event>참가 신청 →</button></div></article></section>
-<section class="community-path" aria-labelledby="pathTitle"><div class="section-head"><h2 id="pathTitle">이렇게 함께해요</h2></div><div class="path-steps"><article><div class="path-art path-meet" aria-hidden="true"><span></span><span></span><span></span><i></i></div><small>01 · MEET</small><h3>모임에서 만나요</h3><p>발표와 대화로 서로의 현장을 알아가요.</p><button class="text-button" data-page="events">모임 일정 →</button></article><span class="path-arrow" aria-hidden="true">→</span><article><div class="path-art path-build" aria-hidden="true"><span></span><span></span><span></span><i></i></div><small>02 · BUILD</small><h3>관심 주제로 실험해요</h3><p>작은 질문을 함께 실행해보는 프로젝트.</p><button class="text-button" data-page="projects">프로젝트 →</button></article><span class="path-arrow" aria-hidden="true">→</span><article><div class="path-art path-share" aria-hidden="true"><span></span><span></span><span></span><i></i></div><small>03 · SHARE</small><h3>다음 사람에게 남겨요</h3><p>발표 자료와 후기로 경험을 이어가요.</p><button class="text-button" data-page="library">발표 자료 →</button></article></div></section><section class="block"><div class="light"><div><h3>함께 풀고 싶은 문제가 있나요?</h3><p>연구 질문, 개발 과제, 실무 자동화 모두 환영해요.</p></div><button class="secondary" id="suggest">아이디어 제안 체험 →</button></div></section></div>
+<section class="block"><div class="section-head"><h2>다음 만남</h2><button class="text-button" data-page="events">모임 일정 →</button></div><article class="event-feature"><div class="date"><small>December</small><strong>17</strong><span>목요일</span></div><div><span class="tag">오프라인 · 정식 모집 준비 중</span><h3>2026 송년 밋업</h3><p class="muted">12월 17일(목) · 서울 센터필드 AWS</p></div><div class="event-side"><span class="availability">영상 같이보기 · 회고 · 대화</span><button class="primary" data-event>참가 신청 →</button></div></article></section>
+<section class="community-path" aria-labelledby="pathTitle"><div class="section-head"><h2 id="pathTitle">이렇게 함께해요</h2><button class="secondary home-community-join" type="button" data-page="members/signup">회원으로 함께하기 →</button></div><div class="path-steps"><article><div class="path-art path-meet" aria-hidden="true"><span></span><span></span><span></span><i></i></div><small>01 · MEET</small><h3>모임에서 만나요</h3><p>발표와 대화로 서로의 현장을 알아가요.</p><button class="text-button" data-page="events">모임 일정 →</button></article><span class="path-arrow" aria-hidden="true">→</span><article><div class="path-art path-build" aria-hidden="true"><span></span><span></span><span></span><i></i></div><small>02 · BUILD</small><h3>관심 주제로 실험해요</h3><p>작은 질문을 함께 실행해보는 프로젝트.</p><button class="text-button" data-page="projects">프로젝트 →</button></article><span class="path-arrow" aria-hidden="true">→</span><article><div class="path-art path-share" aria-hidden="true"><span></span><span></span><span></span><i></i></div><small>03 · SHARE</small><h3>다음 사람에게 남겨요</h3><p>발표 자료와 후기로 경험을 이어가요.</p><button class="text-button" data-page="library">발표 자료 →</button></article></div></section><section class="block"><div class="light"><div><h3>함께 풀고 싶은 문제가 있나요?</h3><p>연구 질문, 개발 과제, 실무 자동화 모두 환영해요.</p></div><button class="secondary" id="suggest">아이디어 제안 체험 →</button></div></section></div>
 <div class="view" id="projects"><div class="page-title"><div class="kicker">LEARN BY BUILDING TOGETHER</div><div class="project-heading"><h1>진행 중 프로젝트</h1><span class="project-members-badge"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M2 5.5 5.4 8l2.6-4 2.6 4L14 5.5l-1.5 6.3h-9z"/><path d="M3.6 12.8h8.8v1H3.6z"/></svg>회원 전용</span></div><p>함께 시도하고, 진행 과정을 나누는 프로젝트.</p></div><nav class="community-tabs" aria-label="프로젝트와 커뮤니티"><button type="button" class="active" data-community="projects" aria-pressed="true">프로젝트</button><button type="button" data-community="reviews" aria-pressed="false">활동 후기</button><button type="button" data-community="board" aria-pressed="false">게시판</button></nav><div id="projectPanel"><p class="prototype-note">프로젝트 제안 예시 · 개설·모집 일정 미정</p><div class="project-topic-filter"><div class="project-language-label">관심 주제</div><div class="filters" aria-label="프로젝트 주제"><button class="filter active" data-topic="all" aria-pressed="true">전체</button><button class="filter" data-topic="transcriptomics" aria-pressed="false">전사체</button><button class="filter" data-topic="gwas" aria-pressed="false">GWAS</button><button class="filter" data-topic="ai" aria-pressed="false">AI 실험</button><button class="filter" data-topic="docking" aria-pressed="false">단백질 도킹</button><button class="filter" data-topic="data" aria-pressed="false">데이터베이스·전처리</button><button class="filter" data-topic="workflow" aria-pressed="false">워크플로·클라우드</button></div><label class="tool-filter">언어·도구<select id="projectTool"><option value="all">모든 도구</option><option value="nextflow">Nextflow</option><option value="snakemake">Snakemake</option><option value="cwl">CWL</option><option value="wdl">WDL</option><option value="python">Python</option><option value="r">R</option><option value="sql">SQL</option></select></label><p id="projectResultCount" class="section-note" role="status"></p></div><div class="project-grid" id="projectGrid"></div><p class="empty" id="projectEmpty" role="status" hidden>선택한 주제와 도구의 프로젝트 제안이 아직 없어요.</p><section class="block"><div class="light"><div><h3>참여도, 진행도 함께</h3><p>배우기 · 만들기 · 기록하기</p></div><button class="secondary" id="suggest2">새 프로젝트 제안 →</button></div></section></div><section id="communityPanel" hidden><div class="board-header"><div><h2 id="communityTitle">활동 후기</h2><p id="communityDescription">함께한 경험과 배운 점을 남겨요.</p></div><button type="button" class="primary" id="writePost">후기 쓰기 →</button></div><div class="board-empty" id="boardEmpty"><span aria-hidden="true">＋</span><h3 id="boardEmptyTitle">첫 후기를 기다리고 있어요</h3><p>글쓰기를 누르면 작성 흐름을 체험할 수 있어요.</p></div><div id="postList" class="post-list"></div><p class="section-note">게시판 시연 · 작성한 글은 이 화면에서만 보이며 새로고침하면 초기화됩니다.</p></section></div>
 <div class="view" id="events"><div class="page-title"><div class="kicker">MEET THE COMMUNITY</div><h1>다가오는 이벤트</h1><p>다가오는 모임과 행사에 참여해보세요.</p></div><div class="filters" aria-label="일정 주최 구분"><button class="filter active" data-event-origin="community" aria-pressed="true">우리 모임</button><button class="filter" data-event-origin="external" aria-pressed="false">외부 행사</button></div><div id="communityEventList"><article class="list-row event-open-example"><div><span class="open-label">신청 중 · 시연 예시</span><h3>워크플로 실습 모임</h3><p>모집 중인 일정의 강조 스타일 예시 · 실제 개최 일정 없음</p></div><button type="button" class="primary" id="previewOpenEvent">바로 신청 →</button></article><p class="open-event-note" id="openEventNote" role="status" hidden>이 화면에서 참가 신청 흐름을 체험할 수 있습니다.</p><article class="list-row"><div><span class="tag">2026.12.17 · 정식 모집 준비 중</span><h3>2026 송년 밋업</h3><p>Nextflow Summit 영상 같이보기 · 올해 회고 · 라운드테이블</p></div><button class="secondary" data-event>참가 신청 →</button></article><article class="list-row"><div><span class="tag">지난 모임 · 2026.10.29</span><h3>Amazon Bio Discovery · Nextflow Summit 리뷰</h3><p>제17회 워크플로 모임</p></div><a class="secondary" href="https://youtu.be/RVZwpj_Bihk" target="_blank" rel="noopener">영상 보기 ↗</a></article><article class="list-row"><div><span class="tag">지난 모임 · 2026.09.29</span><h3>AlphaX · Agentic Research</h3><p>제16회 워크플로 모임</p></div><button class="secondary" data-page="library">자료 보기 →</button></article><section class="block"><div class="light"><div><h3>다음 모임, 여기서 신청하세요</h3><p>행사를 고르고 참석 정보를 입력하면 됩니다.</p></div><button class="primary" data-event>송년 밋업 신청 →</button></div></section></div><section id="externalEventList" hidden><p class="prototype-note">외부 주최 행사는 주최 기관에서 참가 신청과 최신 일정을 안내합니다.</p><article class="list-row"><div><span class="tag">외부 행사 · 컨퍼런스·교육</span><h3>Nextflow Summit · Seqera Events</h3><p>주최 Seqera · 최신 일정은 주최측에서 확인</p></div><a class="secondary" href="https://seqera.io/events/seqera/" target="_blank" rel="noopener">공식 일정·신청 ↗</a></article><article class="list-row"><div><span class="tag">외부 행사 · 해커톤</span><h3>nf-core Hackathon</h3><p>nf-core 커뮤니티 해커톤 · 개최 일정은 공식 안내 확인</p></div><a class="secondary" href="https://nf-co.re/events" target="_blank" rel="noopener">공식 일정·신청 ↗</a></article><p class="section-note">행사별 일정이 확인되면 주최·유형·날짜로 나눠 등록하는 구성입니다.</p></section></div>
 <div class="view" id="library"><div id="sessionListPanel"><div class="page-title"><div class="kicker">SESSIONS & KNOWLEDGE</div><h1>세션 다시보기</h1><p>지난 세션의 발표 자료와 영상을 모아볼 수 있어요.</p></div><div class="filters" aria-label="세션 유형"><button class="filter active" data-session-kind="all" aria-pressed="true">전체</button><button class="filter" data-session-kind="regular" aria-pressed="false">정규 모임</button><button class="filter" data-session-kind="special" aria-pressed="false">비정규 모임</button></div><label for="search">세션 검색</label><input class="search" id="search" placeholder="주제 또는 도구 검색"><div id="resources"></div><p id="empty" class="empty" hidden>검색 결과가 없어요. 다른 키워드를 입력해보세요.</p><nav id="sessionPagination" class="session-pagination" aria-label="세션 페이지"></nav></div><section id="sessionDetailPanel" hidden><button class="text-button" id="backToSessions">← 세션 목록</button><div class="page-title"><span class="tag" id="sessionDetailMeta"></span><h1 id="sessionDetailTitle"></h1><p id="sessionDetailTopics"></p></div><div id="sessionPlayer"></div><p id="sessionVideoNote" class="section-note"></p><div class="session-detail-actions"><a id="sessionYoutubeLink" class="primary" target="_blank" rel="noopener">YouTube에서 다시보기 ↗</a><button class="secondary" id="previousSession">← 이전 세션</button><button class="secondary" id="nextSession">다음 세션 →</button></div></section></div><div class="view" id="members">
@@ -458,7 +545,7 @@ body>header .nav .project-member-nav{position:relative;display:inline-flex;align
 <nav class="mobile-bottom" aria-label="모바일 주요 메뉴">
   <button data-page="events"><span aria-hidden="true">▦</span><b>이벤트</b></button>
   <button class="project-member-nav" data-page="projects" aria-label="프로젝트 · 회원 전용"><span aria-hidden="true">◇</span><span class="project-mobile-crown" aria-hidden="true"><svg viewBox="0 0 16 16" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M2 5.5 5.4 8l2.6-4 2.6 4L14 5.5l-1.5 6.3h-9z"/><path d="M3.6 12.8h8.8v1H3.6z"/></svg></span><b>프로젝트</b></button>
-  <button data-page="metaverse"><span aria-hidden="true">✧</span><b data-i18n-en="Metaverse">메타버스 탐험</b></button>
+  <button class="metaverse-bottom-highlight" data-page="metaverse"><span class="metaverse-menu-mark" aria-hidden="true"><span>✧</span></span><b data-i18n-en="Metaverse">메타버스</b></button>
   <button data-page="library"><span aria-hidden="true">▷</span><b>다시보기</b></button>
   <button data-page="members"><span aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M5 21v-1a7 7 0 0 1 14 0v1"/></svg></span><b>사용자</b></button>
 </nav>

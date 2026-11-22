@@ -6,11 +6,14 @@
   const next = document.getElementById('bioNewsCoverNext');
   const position = document.getElementById('bioNewsCoverPosition');
   const announcement = document.getElementById('bioNewsCoverAnnouncement');
+  const slideHint = home.querySelector('.news-slide-hint');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   let currentIndex = 0;
   let behind;
   let gesture;
   let settling = false;
+
+  slideHint.addEventListener('animationend', () => { slideHint.hidden = true; }, { once: true });
 
   function updatePosition() {
     position.textContent = `${currentIndex + 1} / ${slides.length}`;
@@ -44,7 +47,10 @@
 
   async function settle(direction) {
     if (settling || slides.length < 2) return;
-    if (direction) revealBehind(direction);
+    if (direction) {
+      revealBehind(direction);
+      home.classList.add('news-has-turned');
+    }
     settling = true;
     const slide = slides[currentIndex];
     const destination = direction ? dragTransform(-direction * deck.clientWidth * 1.35, 90) : 'none';
@@ -64,7 +70,7 @@
       behind.classList.remove('is-behind');
       behind = undefined;
       updatePosition();
-      home.scrollIntoView({ block: 'start', behavior: 'instant' });
+      home.scrollIntoView({ block: 'nearest', behavior: 'instant' });
       if (wasFocused) slides[currentIndex].querySelector('.news-source').focus({ preventScroll: true });
     } else {
       clearBehind();
@@ -134,12 +140,15 @@
 
   const header = document.querySelector('body > header');
   const bottomNav = document.querySelector('.mobile-bottom');
+  const intro = document.querySelector('#home .home-intro');
   function sizeCoverToViewport() {
     home.style.setProperty('--news-top', `${header.getBoundingClientRect().height}px`);
     home.style.setProperty('--news-bottom', `${bottomNav.getBoundingClientRect().height}px`);
+    home.style.setProperty('--news-intro', `${intro.getBoundingClientRect().height}px`);
   }
   const chromeObserver = new ResizeObserver(sizeCoverToViewport);
   chromeObserver.observe(header);
   chromeObserver.observe(bottomNav);
+  chromeObserver.observe(intro);
   sizeCoverToViewport();
 })();
