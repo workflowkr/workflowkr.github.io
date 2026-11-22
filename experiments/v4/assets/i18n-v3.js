@@ -804,7 +804,7 @@
       }
       attributes.set(element,stored);
     }
-    toggle.innerHTML=language==='ko'?'<span aria-hidden="true">🇺🇸</span> <span class="language-long">English</span><span class="language-short">EN</span>':'<span aria-hidden="true">🇰🇷</span> <span class="language-long">한국어</span><span class="language-short">KO</span>';
+    toggle.innerHTML=language==='ko'?'<span aria-hidden="true">🇺🇸</span> ENG':'<span aria-hidden="true">🇰🇷</span> KOR';
     toggle.setAttribute('aria-label',language==='ko'?'Switch to English':'한국어로 전환');
     toggle.setAttribute('aria-pressed',String(language==='en'));
     observer.observe(root,{subtree:true,childList:true,characterData:true});
